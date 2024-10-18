@@ -1,0 +1,35 @@
+def encrypt(text, shift):
+    result = ""
+    
+    # Traverse the text
+    for char in text:
+        if char.isalpha():
+            # Shift uppercase and lowercase letters separately
+            start = ord('A') if char.isupper() else ord('a')
+            result += chr((ord(char) - start + shift) % 26 + start)
+        else:
+            result += char  # Non-alphabetical characters are not changed
+    
+    return result
+
+
+def decrypt(text, shift):
+    return encrypt(text, -shift)
+
+
+# Main function to get user input
+def main():
+    choice = input("Type 'E' to encrypt, 'D' to decrypt: ").upper()
+    message = input("Enter your message: ")
+    shift = int(input("Enter shift value: "))
+
+    if choice == 'E':
+        print("Encrypted message:", encrypt(message, shift))
+    elif choice == 'D':
+        print("Decrypted message:", decrypt(message, shift))
+    else:
+        print("Invalid choice. Please select 'E' for encryption or 'D' for decryption.")
+
+
+if __name__ == "__main__":
+    main()
